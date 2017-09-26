@@ -13,7 +13,7 @@ for(int i=0; i<mas.length;i++){
     double x=1/(Math.pow((tmp+1),2));
     if(x < E) System.out.println("Number of min element is:" + i);
     else{
-        System.out.println("Volume:" + x);
+        System.out.println("Vlume:" + x);
     }
 }
 }
