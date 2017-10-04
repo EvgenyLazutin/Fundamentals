@@ -1,4 +1,5 @@
 package com.epam;
+
 public class IntroTask6NoteChange {
     private static int idNotepad=0;
     private IntroTask6Note noteMas[];
