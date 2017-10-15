@@ -1,4 +1,4 @@
-package com.epam;
+package com.epam.Intro;
 
 public class IntroTask6NoteChange {
     private static int idNotepad=0;

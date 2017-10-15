@@ -1,5 +1,5 @@
 
-package com.epam;
+package com.epam.Intro;
 
 
 import static java.lang.Math.E;

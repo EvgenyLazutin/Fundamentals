@@ -1,4 +1,4 @@
-package com.epam;
+package com.epam.Intro;
 
 public class Main {
 
