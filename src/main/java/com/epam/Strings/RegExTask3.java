@@ -1,33 +1,39 @@
 package com.epam.Strings;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class RegExTask3 {
 
     public static void main(String[] args) {
 
-        Pattern ptrn=Pattern.compile("Рис.+");
-        FileReader fileForReader = null;
+
+        Pattern ptrn=Pattern.compile("(Рис)+..[0-9]{1,4}");
+
+        BufferedReader br = null;
         try {
-            fileForReader = new FileReader("/home/jon/IdeaProjects/JavaFundamentals/src/main/resources/Java.SE.03.Information handling_task_attachment.html");
+            br = new BufferedReader(new InputStreamReader(new FileInputStream("" +
+                    "/home/jon/IdeaProjects/JavaFundamentals/src/main/resources/" +
+                    "Java.SE.03.Information handling_task_attachment.html"),"CP1251"));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        BufferedReader br = new BufferedReader(fileForReader);
         String strLine;
-        String[] result = new String[10];
+        System.out.println(br.toString());
         try {
             while ((strLine=br.readLine())!=null){
-               result=ptrn.split(strLine);
-
-            }
-            for (String str:
-                    result ) {
-                System.out.println(str);
+               Matcher result=ptrn.matcher(strLine);
+               boolean flag=false;
+               while (result.find()) {
+                   System.out.println("Result: " + result.group());
+                       flag=true;
+                   }
+                if(flag) {
+                    System.out.println("Строка: " + strLine);
+               }
             }
 
         } catch (IOException e) {
@@ -35,7 +41,7 @@ public class RegExTask3 {
         }
 
         try {
-            fileForReader.close();
+            br.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
