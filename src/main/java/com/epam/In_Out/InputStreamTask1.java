@@ -9,7 +9,7 @@ import java.util.Set;
 
 public class InputStreamTask1 {
     private String pathIn;
-    private String pathOut;
+
     public static String[] KeyWords = {"public", "abstract", "continue", "for", "new", "switch", "assert",
             "default", "goto", "package", "synchronized", "boolean", "do", "if", "private", "this",
             "break", "double", "implements", "protected", "throw", "byte", "else", "import", "public",
@@ -30,7 +30,7 @@ public class InputStreamTask1 {
             System.out.println("Содержимое файла:");
             String str = new String(buffer, "UTF-8");
             // str.trim();
-            String[] strmas = str.split("\\s|\\(|\\)|\\[|\\.");
+            String[] strmas = str.split("\\s|\\(|\\)|\\[|;|,|\\.");
             for (int i = 0; i < strmas.length; i++) {
                 for (String it :
                         KeyWords) {
