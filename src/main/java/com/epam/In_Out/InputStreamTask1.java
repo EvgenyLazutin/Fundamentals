@@ -19,18 +19,18 @@ public class InputStreamTask1 {
     private Set<String> SetKeyWords = new HashSet<>();
     private Map<String, Integer> MapKeyWords = new HashMap<>();
 
-    public InputStreamTask1(String path) {
+     InputStreamTask1(String path) {
         this.pathIn = path;
     }
 
-    void InputStreamTask1Read() {
+ private    void InputStreamTask1Read() {
         try (FileInputStream fin = new FileInputStream(pathIn)) {
             byte[] buffer = new byte[fin.available()];// считаем файл в буфер
             fin.read(buffer, 0, fin.available());
             System.out.println("Содержимое файла:");
             String str = new String(buffer, "UTF-8");
             // str.trim();
-            String[] strmas = str.split("\\s");
+            String[] strmas = str.split("\\s|\\(|\\)|\\[|\\.");
             for (int i = 0; i < strmas.length; i++) {
                 for (String it :
                         KeyWords) {
@@ -41,7 +41,9 @@ public class InputStreamTask1 {
                             MapKeyWords.put(strmas[i], 1);
                         }
                         if (!flag) {
-                            MapKeyWords.put(strmas[i], +1);
+                            int tmp;
+                            tmp=MapKeyWords.get(strmas[i]);
+                            MapKeyWords.put(strmas[i], tmp+1);
                         }
 
                     }
@@ -50,7 +52,7 @@ public class InputStreamTask1 {
 
             }
             for (Map.Entry entry : MapKeyWords.entrySet()) {
-                    System.out.println("Key: " + entry.getKey() + " Value: "
+                    System.out.println("Key: " + entry.getKey() + "; Quantity: "
                             + entry.getValue());
             }
 
@@ -60,7 +62,7 @@ public class InputStreamTask1 {
         }
     }
 
-    void InputStreamTask1Write(String PathOut) {
+    private void InputStreamTask1Write(String PathOut) {
         FileOutputStream outputStream = null;
         try {
             outputStream = new FileOutputStream(PathOut);
