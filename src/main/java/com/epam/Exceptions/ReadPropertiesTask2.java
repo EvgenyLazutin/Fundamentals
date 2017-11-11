@@ -3,13 +3,14 @@ package com.epam.Exceptions;
 import java.io.UnsupportedEncodingException;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
+import java.util.Set;
 
 public class ReadPropertiesTask2 {
 
 
     //private String pathFileProp;
     private ResourceBundle resourceBundle;
-    void readPropFile(String nameProperty) throws SecurityException{
+  public boolean readPropFile(String nameProperty) throws SecurityException{
 
         try {
 
@@ -18,24 +19,30 @@ public class ReadPropertiesTask2 {
                 this.resourceBundle = ResourceBundle.getBundle(nameProperty);
                // this.pathFileProp=nameProperty;
                 System.out.println("Property file is read!");
-
+                return true;
 
         }catch (NullPointerException e){
             System.out.println("Patch to file is Null");
+            return false;
         }catch (MissingResourceException e){
             System.out.println("File not found!");
+            return false;
         }
 
 
     }
 
-    String getObject(String key){
+   public String getObject(String key){
       try {
        return resourceBundle.getString(key);
     }catch (MissingResourceException e){
           System.out.println("key is not in the file!");
           return "Key is not found!";
       }
+    }
+
+    public Set<String> getKeyProperties(){
+        return resourceBundle.keySet();
     }
 
     public static void main(String[] args) throws UnsupportedEncodingException {
