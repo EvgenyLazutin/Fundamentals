@@ -57,7 +57,7 @@ public class ConcurrentReadFileTask1 extends Thread{
             return operation;
         }
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) {
        SharedOperation sharedOperation=new SharedOperation("/home/jon/IdeaProjects/JavaFundamentals" +
                "/src/main/resources/DepositeOperation.txt");
         ExecutorService executorService= Executors.newFixedThreadPool(5);
