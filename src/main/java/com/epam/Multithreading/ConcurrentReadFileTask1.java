@@ -4,19 +4,21 @@ import java.util.Random;
 import java.util.Scanner;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class ConcurrentReadFileTask1 extends Thread{
 
     private final SharedOperation resource;
     private DepositOperation[] massivDeposit;
     private Random rand = new Random();
+    private ReentrantLock locker = new ReentrantLock();
 
     public ConcurrentReadFileTask1(SharedOperation resource, String name) {
         super(name);
         this.resource = resource;
        massivDeposit=new DepositOperation[15];
         for (int i = 0; i <15; i++) {
-            massivDeposit[i]=new DepositOperation(i*1000,rand.nextInt(100000));
+            massivDeposit[i]=new DepositOperation(i*1000,rand.nextInt(10000)%1000);
         }
     }
 
@@ -29,17 +31,18 @@ public class ConcurrentReadFileTask1 extends Thread{
                 int depFrom = scanner.nextInt();
                 int val = scanner.nextInt();
                 int depTo = scanner.nextInt();
-
+                locker.lock();
                 for (int i = 0; i < massivDeposit.length; i++) {
                     if (massivDeposit[i].getNumberDep() == depFrom) {
                         massivDeposit[i].depPlus(val);
                         for (int j = 0; j < massivDeposit.length; j++) {
                             if (massivDeposit[j].getNumberDep() == depTo) {
-                                massivDeposit[j].depPlus(~val);
+                                massivDeposit[j].depPlus(~val+1);
                             }
                         }
                     }
                 }
+                locker.unlock();
 
 
             } catch (InterruptedException e) {

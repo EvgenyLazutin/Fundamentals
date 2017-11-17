@@ -28,18 +28,18 @@ public class SynchronizedReadFileTask1 extends Thread{
                 int depFrom = scanner.nextInt();
                 int val = scanner.nextInt();
                 int depTo = scanner.nextInt();
-
-                for (int i = 0; i < massivDeposit.length; i++) {
-                    if (massivDeposit[i].getNumberDep() == depFrom) {
-                        massivDeposit[i].depPlus(val);
-                        for (int j = 0; j < massivDeposit.length; j++) {
-                            if (massivDeposit[j].getNumberDep() == depTo) {
-                                massivDeposit[j].depPlus(~val);
-                            }
-                        }
-                    }
+synchronized (resource) {
+    for (int i = 0; i < massivDeposit.length; i++) {
+        if (massivDeposit[i].getNumberDep() == depFrom) {
+            massivDeposit[i].depPlus(val);
+            for (int j = 0; j < massivDeposit.length; j++) {
+                if (massivDeposit[j].getNumberDep() == depTo) {
+                    massivDeposit[j].depPlus(~val + 1);
                 }
-
+            }
+        }
+    }
+}
 
             } catch (InterruptedException e) {
                 e.printStackTrace();
