@@ -20,11 +20,10 @@ public class ReadPropMultithreadedTask2 extends ReadPropertiesTask2 implements R
     @Override
     public void run() {
         while (!queue.isEmpty()) {
-
             System.out.print(Thread.currentThread().getName()+"  ");
             System.out.println(getObject( queue.poll()));
             try {
-                Thread.sleep(1000);
+               Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -33,11 +32,12 @@ public class ReadPropMultithreadedTask2 extends ReadPropertiesTask2 implements R
     }
     public static void main(String[] args) {
 
-        ExecutorService executorService= Executors.newFixedThreadPool(3);
+        ExecutorService executorService= Executors.newFixedThreadPool(5);
         ReadPropMultithreadedTask2 task2=new ReadPropMultithreadedTask2("prop_en");
-        executorService.execute(new Thread(task2,"4"));
-        executorService.execute(new Thread(task2,"2"));
-        executorService.execute(new Thread(task2,"3"));
+        for (int i = 0; i <5 ; i++) {
+            executorService.execute(new Thread(task2));
+        }
+
         executorService.shutdown();
 
     }
