@@ -11,7 +11,7 @@ import java.util.*;
  * @author Lazutin Evgeny<e_lazutin@mail.ru>
  *
  */
-public class ParserWeb {
+ class ParserWeb {
 
 
     private List  <String> listStrings=new ArrayList<>();
@@ -152,20 +152,6 @@ public class ParserWeb {
             System.out.println("Key word: " + entry.getValue() + "; Sentence: "
                     + entry.getKey());
         }
-    }
-
-
-    public static void main(String[] args) {
-        ParserWeb parserWeb = new ParserWeb();
-       // parserWeb.getHtmlCode("https://habrahabr.ru/post/280238");
-       // parserWeb.addUrl("https://habrahabr.ru/post/280238");
-        parserWeb.readerFileUrl("/home/jon/IdeaProjects/JavaFundamentals/WebScraping/src/main/resources/listOfUrls.txt");
-        parserWeb.addKeyWord("полиморфный, Rust");
-        parserWeb.findKeyWord();
-        parserWeb.showKeyWord();
-        parserWeb.showKeySentence();
-
-
     }
 }
 

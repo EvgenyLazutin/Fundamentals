@@ -1,10 +1,19 @@
 package evg.laz;
 
+
+
+/**
+ * Console Web Scraper. Main class Scraper with supports the data processing commands.
+ * Search of one or several key words on the internet pages.
+ *
+ * @author Lazutin Evgeny<e_lazutin@mail.ru>
+ *
+ */
 public class Scraper {
 
     private ParserWeb parserWeb;
 
-    public Scraper() {
+    private Scraper() {
         this.parserWeb = new ParserWeb();
     }
 
