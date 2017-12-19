@@ -11,6 +11,8 @@ public class Consumer {
     private BlockingQueue<Message> queue;
     private Thread consumerThread = null;
     private final int bufSize=10;
+    private final String pathFile="ProducerConsumer/src/" +
+            "main/resources/messageoutput.txt";
 
     public Consumer(BlockingQueue<Message> queue) {
         this.queue = queue;
@@ -18,25 +20,25 @@ public class Consumer {
 
     public void startConsuming() {
         Message [] buffer=new Message[bufSize];
-        clearFile("/home/jon/IdeaProjects/" +
-                "JavaFundamentals/ProducerConsumer/src/" +
-                "main/resources/messageoutput.txt");
+        clearFile(pathFile);
         consumerThread = new Thread(new Runnable() {
             @Override
             public void run() {
-
+                int bufSteak=0;
                 while (true) {
                     try {
-
                         for (int i = 0; i < bufSize; i++) {
                             buffer[i] = queue.take();
+                            bufSteak=i+1;
                         }
                         Arrays.sort(buffer);
-                        writerFile("/home/jon/IdeaProjects/" +
-                                "JavaFundamentals/ProducerConsumer/src/" +
-                                "main/resources/messageoutput.txt", buffer);
+                        writerFile(pathFile, buffer);
 
                     } catch (InterruptedException e) {
+                        Message [] steakBuf=new Message[bufSteak];
+                        System.arraycopy(buffer, 0,steakBuf,0,bufSteak);
+                        Arrays.sort(steakBuf);
+                        writerFile(pathFile, steakBuf);
                         // executing thread has been interrupted, exit loop
                         break;
                     }
@@ -53,8 +55,8 @@ public class Consumer {
 
   private void writerFile(String pathOut, Message message[]){
         try(BufferedWriter bufferedWriter=new BufferedWriter(new FileWriter(pathOut, true))) {
-            for (int i = 0; i < message.length; i++) {
-                bufferedWriter.write(message[i].toString());
+            for (Message aMessage : message) {
+                bufferedWriter.write(aMessage.toString());
             }
 
         } catch (IOException e) {

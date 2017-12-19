@@ -17,13 +17,12 @@ public class Producer {
             @Override
             public void run() {
                 try {
-                    while (messageCounter <=100) {
+                    while (messageCounter <=103) {
                         Message message = MessageFactory.generateMessage(messageCounter);
                         queue.add(message);
                         messageCounter++;
-
                     }
-                    stopProducing();
+
                 } catch (InterruptedException e) {
                     // exit loop quietly
                 }
