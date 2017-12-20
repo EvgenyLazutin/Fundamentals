@@ -25,6 +25,9 @@ public class Producer {
 
                 } catch (InterruptedException e) {
                     // exit loop quietly
+                }finally {
+                    Message messageExit =new Message("Exit");
+                    queue.add(messageExit);
                 }
             }
         });

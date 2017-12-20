@@ -20,6 +20,12 @@ public class Message implements Comparable<Message> {
         this.text = text;
     }
 
+    public Message(String exit) {
+        this.timestamp = 0;
+        this.priority = Priority.LOW;
+        this.text = exit;
+    }
+
     public long getTimestamp() {
         return timestamp;
     }
