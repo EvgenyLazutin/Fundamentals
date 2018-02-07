@@ -67,7 +67,7 @@ public class Consumer {
         try(BufferedWriter bufferedWriter=new BufferedWriter(new FileWriter(pathOut, true))) {
             for (Message aMessage : message) {
                 bufferedWriter.write(aMessage.toString());
-                System.out.println(aMessage);
+                System.out.print(aMessage);
             }
 
         } catch (IOException e) {
